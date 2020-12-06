@@ -17,10 +17,10 @@ import javax.persistence.TemporalType;
 public class Cliente implements Serializable{
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String nombre;
+	private String nombres;
 	private String apellidos;
 	private String email;
 	
@@ -29,14 +29,13 @@ public class Cliente implements Serializable{
 	private Date createAt;
 
 	public Cliente() {
-		super();
-		// TODO Auto-generated constructor stub
+		super(); 
 	}
 
-	public Cliente(Long id, String nombre, String apellidos, String email, Date createAt) {
+	public Cliente(Long id, String nombres, String apellidos, String email, Date createAt) {
 		super();
 		this.id = id;
-		this.nombre = nombre;
+		this.nombres = nombres;
 		this.apellidos = apellidos;
 		this.email = email;
 		this.createAt = createAt;
@@ -50,12 +49,12 @@ public class Cliente implements Serializable{
 		this.id = id;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getNombres() {
+		return nombres;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombres(String nombres) {
+		this.nombres = nombres;
 	}
 
 	public String getApellidos() {
