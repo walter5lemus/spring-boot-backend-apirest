@@ -1,10 +1,9 @@
 package com.spring.dao;
 
-import org.springframework.data.repository.CrudRepository;
-
+import org.springframework.data.jpa.repository.JpaRepository;
 import com.spring.entity.Cliente;
 
-public interface ClienteDAO extends CrudRepository<Cliente, Long>{
+public interface ClienteDAO extends JpaRepository<Cliente, Long>{
 	
 	
 
