@@ -16,6 +16,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.sun.istack.NotNull;
+
 @Entity	
 @Table(name = "clientes")
 public class Cliente implements Serializable{
@@ -38,13 +40,16 @@ public class Cliente implements Serializable{
 	private String email;
 	 
 	@Column(name = "create_at")
+	@NotNull
 	@Temporal(TemporalType.DATE)
 	private Date createAt;
 	
-	@PrePersist
-	public void prePersist() {
-		createAt = new Date();
-	}
+	private String foto;
+	
+//	@PrePersist
+//	public void prePersist() {
+//		createAt = new Date();
+//	}
 
 	public Cliente() {
 		super(); 
@@ -98,6 +103,17 @@ public class Cliente implements Serializable{
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
+	
+	
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+
 
 	/**
 	 * 
