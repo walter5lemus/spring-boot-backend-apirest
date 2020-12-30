@@ -209,7 +209,7 @@ public class ClienteController {
 		Resource recurso = null;
 
 		try {
-			uploadService.cargar(nombreFoto);
+			recurso = uploadService.cargar(nombreFoto);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
