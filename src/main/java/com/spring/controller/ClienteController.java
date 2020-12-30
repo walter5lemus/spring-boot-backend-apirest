@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.entity.Cliente;
+import com.spring.entity.Region;
 import com.spring.services.ClienteService;
 import com.spring.services.UploadService;
 
@@ -135,6 +136,7 @@ public class ClienteController {
 			clienteActual.setEmail(cliente.getEmail());
 			clienteActual.setNombres(cliente.getNombres());
 			clienteActual.setCreateAt(cliente.getCreateAt());
+			clienteActual.setRegion(cliente.getRegion());
 			clienteUpdated = clienteService.save(clienteActual);
 		} catch (Exception e) {
 			response.put("mensaje", "Error al actualizar el cliente en la base de datos");
@@ -216,6 +218,11 @@ public class ClienteController {
 		cabecera.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + recurso.getFilename() + "\"");
 
 		return new ResponseEntity<Resource>(recurso, cabecera, HttpStatus.OK);
+	}
+	
+	@GetMapping("/clientes/regiones")
+	public List<Region> listarRegiones() {
+		return clienteService.findAllRegiones();
 	}
 
 }

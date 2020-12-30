@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.spring.entity.Cliente;
+import com.spring.entity.Region;
 
 public interface ClienteService {
 	
@@ -18,5 +19,7 @@ public interface ClienteService {
 	public Cliente save(Cliente cliente);
 	
 	public void delete(Long id);
+	
+	public List<Region> findAllRegiones();
 
 }

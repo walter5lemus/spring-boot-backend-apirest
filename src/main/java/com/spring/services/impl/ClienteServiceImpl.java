@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.dao.ClienteDAO;
 import com.spring.entity.Cliente;
+import com.spring.entity.Region;
 import com.spring.services.ClienteService;
 
 @Service
@@ -50,6 +51,14 @@ public class ClienteServiceImpl implements ClienteService{
 	public void delete(Long id) {
 		clienteDAO.deleteById(id);
 		
+	}
+
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Region> findAllRegiones() {
+		
+		return clienteDAO.findAllRegiones();
 	}
 
 
