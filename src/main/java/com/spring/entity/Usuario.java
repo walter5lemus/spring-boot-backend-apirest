@@ -32,10 +32,40 @@ public class Usuario implements Serializable {
 
 	private Boolean enabled;
 
+	private String nombres;
+	private String apellidos;
+	
+	@Column(unique = true)
+	private String email;
+	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "role_id"), uniqueConstraints = {
 			@UniqueConstraint(columnNames = { "usuario_id", "role_id" }) })
 	private List<Rol> roles;
+
+	public String getNombre() {
+		return nombres;
+	}
+
+	public void setNombre(String nombres) {
+		this.nombres = nombres;
+	}
+
+	public String getApellido() {
+		return apellidos;
+	}
+
+	public void setApellido(String apellidos) {
+		this.apellidos = apellidos;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public Long getId() {
 		return id;
