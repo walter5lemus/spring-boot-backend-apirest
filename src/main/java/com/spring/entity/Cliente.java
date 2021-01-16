@@ -1,8 +1,11 @@
 package com.spring.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,8 +22,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-  
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties; 
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "clientes")
@@ -52,8 +56,12 @@ public class Cliente implements Serializable {
 	@NotNull(message = "la región no puede ser vacia")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "region_id")
-	@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Region region;
+
+	@JsonIgnoreProperties({ "cliente", "hibernateLazyInitializer", "handler" })
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente", cascade = CascadeType.ALL)
+	List<Factura> factura;
 
 //	@PrePersist
 //	public void prePersist() {
@@ -61,7 +69,7 @@ public class Cliente implements Serializable {
 //	}
 
 	public Cliente() {
-		super();
+		this.factura = new ArrayList<Factura>();
 	}
 
 	public Cliente(Long id, String nombres, String apellidos, String email, Date createAt) {
@@ -133,4 +141,13 @@ public class Cliente implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	public List<Factura> getFactura() {
+		return factura;
+	}
+
+	public void setFactura(List<Factura> factura) {
+		this.factura = factura;
+	}
+
 }
