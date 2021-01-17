@@ -9,22 +9,26 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.dao.ClienteDAO;
+import com.spring.dao.FacturaDAO;
 import com.spring.entity.Cliente;
+import com.spring.entity.Factura;
 import com.spring.entity.Region;
 import com.spring.services.ClienteService;
 
 @Service
-public class ClienteServiceImpl implements ClienteService{
+public class ClienteServiceImpl implements ClienteService {
 
 	@Autowired
 	private ClienteDAO clienteDAO;
-	
+
+	@Autowired
+	private FacturaDAO facturaDAO;
+
 	@Override
 	@Transactional(readOnly = true)
-	public List<Cliente> findAll() {  
+	public List<Cliente> findAll() {
 		return (List<Cliente>) clienteDAO.findAll();
 	}
-	
 
 	@Override
 	@Transactional(readOnly = true)
@@ -32,7 +36,6 @@ public class ClienteServiceImpl implements ClienteService{
 		// TODO Auto-generated method stub
 		return clienteDAO.findAll(pageable);
 	}
-	
 
 	@Override
 	@Transactional(readOnly = true)
@@ -50,16 +53,32 @@ public class ClienteServiceImpl implements ClienteService{
 	@Transactional
 	public void delete(Long id) {
 		clienteDAO.deleteById(id);
-		
-	}
 
+	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public List<Region> findAllRegiones() {
-		
 		return clienteDAO.findAllRegiones();
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public Factura findFacturaById(Long id) {
+		return facturaDAO.findById(id).orElse(null); 
+	}
+
+	@Override
+	@Transactional()
+	public Factura saveFactura(Factura factura) {
+		return facturaDAO.save(factura);
+	}
+
+	@Override
+	@Transactional()
+	public void deleteFacturaById(Long id) {
+		facturaDAO.deleteById(id);
+
+	}
 
 }
