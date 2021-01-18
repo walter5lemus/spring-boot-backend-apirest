@@ -37,7 +37,7 @@ import com.spring.entity.Region;
 import com.spring.services.ClienteService;
 import com.spring.services.UploadService;
 
-@CrossOrigin(origins = { "http://localhost:4200" })
+@CrossOrigin(origins = { "http://localhost:4200", "*" })
 @RestController
 @RequestMapping("/api")
 public class ClienteController {
@@ -59,7 +59,7 @@ public class ClienteController {
 		return clienteService.findAll(pageable);
 	}
 
-//	@Secured({"ROLE_ADMIN","ROLE_USER"})
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@GetMapping("/clientes/{id}")
 	public ResponseEntity<?> show(@PathVariable Long id) {
 		Cliente cliente = null;

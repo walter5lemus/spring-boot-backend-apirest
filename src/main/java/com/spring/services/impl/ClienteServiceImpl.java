@@ -10,8 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.dao.ClienteDAO;
 import com.spring.dao.FacturaDAO;
+import com.spring.dao.ProductoDAO;
 import com.spring.entity.Cliente;
 import com.spring.entity.Factura;
+import com.spring.entity.Producto;
 import com.spring.entity.Region;
 import com.spring.services.ClienteService;
 
@@ -23,6 +25,9 @@ public class ClienteServiceImpl implements ClienteService {
 
 	@Autowired
 	private FacturaDAO facturaDAO;
+	
+	@Autowired
+	private ProductoDAO productoDAO;
 
 	@Override
 	@Transactional(readOnly = true)
@@ -79,6 +84,12 @@ public class ClienteServiceImpl implements ClienteService {
 	public void deleteFacturaById(Long id) {
 		facturaDAO.deleteById(id);
 
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Producto> findProductoByNombre(String term) {
+		return productoDAO.findByNombreContainingIgnoreCase(term);
 	}
 
 }
